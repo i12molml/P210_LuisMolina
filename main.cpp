@@ -10,7 +10,6 @@ void menuUsuario();
 void menuAdmin();
 void menuCursos();
 Curso crear();
-
 Usuario registrar();
 
 int main(){
@@ -83,13 +82,17 @@ int main(){
                         if(mCurso.addUserToCurso(idCurso,usuario)){
                             cout<<"Agregado correctamente"<<endl;
                         }else{cout<<"No se ha encontrado el curso"<<endl;}
+                    }else if(opcion==4){
+                        continuar= false;
                     }
-
                 }
             }else if(usuario.getTipoUsuario()== "ADMINISTRADOR"){
                 while(continuar){
                     menuAdmin();
                     cin>>opcion;
+                    if(opcion==1){
+                        continuar= false;
+                    }
                 }
             }else if (usuario.getTipoUsuario()== "ADMINISTRADOR_CURSOS"){
                 while(continuar){
@@ -98,7 +101,9 @@ int main(){
                     if(opcion == 1){
                         mCurso.printAll();
                     }else if(opcion == 2){
-                        mCurso.addCurso(crear());
+                        if(mCurso.addCurso(crear())){
+                            cout<<"Creado correctamente"<<endl;
+                        }else{cout<<"Ha habido un error en la creación del curso"<<endl;}
                     }else if(opcion == 3){
                         string idCurso;
                         mCurso.printAllNames();
@@ -107,6 +112,8 @@ int main(){
                         if(mCurso.removeCurso(idCurso)){
                             cout<<"Curso borrado"<<endl;
                         }else{cout<<"Error al borrar el curso"<<endl;}
+                    }else if(opcion==4){
+                        continuar= false;
                     }
                 }
             }else{
@@ -115,8 +122,6 @@ int main(){
         };
     }
    }
-
-
     return 1;
 }
 
@@ -129,14 +134,17 @@ void menuUsuario(){
     cout<<"1.ver todos los  Cursos"<<endl;
     cout<<"2.ver cursos donde estoy matriculado"<<endl;
     cout<<"3.inscribirse a un curso"<<endl;
+    cout<<"4.Salir"<<endl;
 }
 void menuAdmin(){
     cout<<"menuAdmin"<<endl;
+    cout<<"1.Salir"<<endl;
 }
 void menuCursos(){
     cout<<"1.ver Cursos"<<endl;
     cout<<"2.nuevo Curso"<<endl;
     cout<<"3.eliminar Curso"<<endl;
+    cout<<"4.Salir"<<endl;
 }
 
 
@@ -178,9 +186,6 @@ Usuario registrar(){
     return usuario;
 }
 
-/*
-revisar
-*/
 Curso crear() {
     string id, nombre, horario;
     int capacidad;
