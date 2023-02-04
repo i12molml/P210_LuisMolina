@@ -8,5 +8,5 @@ void Usuario::printUsuario() {
     cout << "Email: " << getEmail() << endl;
     cout << "Telefono: " << getTelefono() << endl;
     cout << "Tipo de usuario: " << getTipoUsuario() << endl;
-    cout << "Fecha de nacimiento" << getFechaNacimiento()<<endl;
+    cout << "Fecha de nacimiento: " << getFechaNacimiento()<<endl;
 }

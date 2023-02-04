@@ -9,10 +9,12 @@ void menuInicial();
 void menuUsuario();
 void menuAdmin();
 void menuCursos();
+
 Curso crear();
 Usuario registrar();
 
 int main(){
+    
     ManejadorCursos mCurso;
         Curso curso1("C001", "Programación en C++", 50, "2022-05-10", "2022-08-20", "Lunes y Miércoles de 18:00 a 21:00");
         Curso curso2("C002", "Diseño Gráfico", 40, "2022-06-01", "2022-09-10", "Martes y Jueves de 16:00 a 19:00");
@@ -34,7 +36,6 @@ int main(){
         mCurso.addCurso(curso8);
         mCurso.addCurso(curso9);
         mCurso.addCurso(curso10);
-
     ManejadorUsuarios mUsuario;
         Usuario usuario1("123456789", "Juan Perez", "juanperez@gmail.com", "password1234", 123456789, "USUARIO", "01/01/2000");
         Usuario administrador1("987654321", "Ana Rodriguez", "anarodriguez@gmail.com", "password4321", 987654321, "ADMINISTRADOR", "02/02/2002");
@@ -44,6 +45,7 @@ int main(){
         mUsuario.addUsuario(administrador1);
         mUsuario.addUsuario(administradorCursos1);
         mUsuario.addUsuario(usuario2);
+
    bool continuar = true;
    int opcion= 0;
    while(continuar){
@@ -90,7 +92,23 @@ int main(){
                 while(continuar){
                     menuAdmin();
                     cin>>opcion;
-                    if(opcion==1){
+                    if(opcion == 1){
+                        mCurso.printAll();
+                    }else if(opcion == 2){
+                        if(mCurso.addCurso(crear())){
+                            cout<<"Creado correctamente"<<endl;
+                        }else{cout<<"Ha habido un error en la creación del curso"<<endl;}
+                    }else if(opcion == 3){
+                        string idCurso;
+                        mCurso.printAllNames();
+                        cout<<"Introduzca la id del curso a borrar"<<endl;
+                        cin>>idCurso;
+                        if(mCurso.removeCurso(idCurso)){
+                            cout<<"Curso borrado"<<endl;
+                        }else{cout<<"Error al borrar el curso"<<endl;}
+                    }else if(opcion==4){
+                        mUsuario.printAll();
+                    }else if(opcion==5){
                         continuar= false;
                     }
                 }
@@ -126,21 +144,28 @@ int main(){
 }
 
 void menuInicial(){
+    cout<<"Bienvenido"<<endl;
     cout<<"1.Registrarse"<<endl;
     cout<<"2.Iniciar Sesión"<<endl;
     cout<<"3.Salir"<<endl;
 }
 void menuUsuario(){
+    cout<<"Menu de Usuario"<<endl;
     cout<<"1.ver todos los  Cursos"<<endl;
     cout<<"2.ver cursos donde estoy matriculado"<<endl;
     cout<<"3.inscribirse a un curso"<<endl;
     cout<<"4.Salir"<<endl;
 }
 void menuAdmin(){
-    cout<<"menuAdmin"<<endl;
-    cout<<"1.Salir"<<endl;
+    cout<<"Menu de Administrador"<<endl;
+    cout<<"1.ver Cursos"<<endl;
+    cout<<"2.nuevo Curso"<<endl;
+    cout<<"3.eliminar Curso"<<endl;
+    cout<<"4.Listar Usuarios"<<endl;
+    cout<<"5.Salir"<<endl;
 }
 void menuCursos(){
+    cout<<"Menu de Administrador de Cursos"<<endl;
     cout<<"1.ver Cursos"<<endl;
     cout<<"2.nuevo Curso"<<endl;
     cout<<"3.eliminar Curso"<<endl;
@@ -196,7 +221,8 @@ Curso crear() {
     cout << "Introduce el ID del curso: ";
     cin >> id;
     cout << "Introduce el nombre del curso: ";
-    cin >> nombre;
+    cin.ignore();
+    getline (cin,nombre);
     cout << "Introduce la capacidad del curso: ";
     cin >> capacidad;
     cout << "Introduce la fecha de inicio del curso (yyyy-mm-dd): ";
@@ -204,24 +230,27 @@ Curso crear() {
     cout << "Introduce la fecha de fin del curso (yyyy-mm-dd): ";
     cin >> fechaDeFin;
     cout << "Introduce el horario del curso: ";
-    cin >> horario;
+    cin.ignore();
+    getline (cin,horario);
     int numRequisitos;
     cout << "Introduce el número de requisitos del curso: ";
     cin >> numRequisitos;
+    cin.ignore();
     for (int i = 0; i < numRequisitos; i++) {
         cout << "Introduce el requisito " << i + 1 << ": ";
         string requisito;
-        cin >> requisito;
+        getline (cin,requisito);
         requisitos.push_back(Requisitos(requisito));
     }
 
     int numRecursos;
     cout << "Introduce el número de recursos del curso: ";
     cin >> numRecursos;
+    cin.ignore();
     for (int i = 0; i < numRecursos; i++) {
         cout << "Introduce el recurso " << i + 1 << ": ";
         string recurso;
-        cin >> recurso;
+        getline (cin,recurso);
         recursos.push_back(recurso);
     }
     return Curso(id, nombre, capacidad, fechaDeInicio, fechaDeFin, horario,recursos, requisitos);

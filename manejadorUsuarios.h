@@ -18,6 +18,7 @@ class ManejadorUsuarios {
         bool modifyUsuario(Usuario usuarioAntiguo, Usuario usuarioNuevo);
         Usuario findUsuario(string email);
         bool checkLogin(string email,string password);
+        void printAll();
 };
 
 #endif // MANEJADORUSUARIOS_H

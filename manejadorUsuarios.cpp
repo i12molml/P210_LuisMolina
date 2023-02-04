@@ -1,8 +1,16 @@
 #include <string>
 #include <vector>
+#include <iostream>
 #include "usuario.h"
 #include "manejadorUsuarios.h"
 using namespace std;
+
+  void ManejadorUsuarios::printAll(){
+    for(int i=0; i< usuarios.size();i++){
+    usuarios[i].printUsuario();
+    cout<<"-----"<<endl;
+  }
+  }
 
   bool ManejadorUsuarios::addUsuario(Usuario usuario) {
     this->usuarios.push_back(usuario);
