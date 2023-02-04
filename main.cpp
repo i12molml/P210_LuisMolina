@@ -9,26 +9,50 @@ void menuInicial();
 void menuUsuario();
 void menuAdmin();
 void menuCursos();
+Curso crear();
 
 Usuario registrar();
 
 int main(){
     ManejadorCursos mCurso;
+        Curso curso1("C001", "Programación en C++", 50, "2022-05-10", "2022-08-20", "Lunes y Miércoles de 18:00 a 21:00");
+        Curso curso2("C002", "Diseño Gráfico", 40, "2022-06-01", "2022-09-10", "Martes y Jueves de 16:00 a 19:00");
+        Curso curso3("C003", "Bases de Datos", 30, "2022-05-15", "2022-08-05", "Lunes y Miércoles de 10:00 a 13:00");
+        Curso curso4("C004", "Desarrollo Web", 60, "2022-07-01", "2022-10-01", "Martes y Jueves de 19:00 a 22:00");
+        Curso curso5("C005", "Machine Learning", 45, "2022-06-10", "2022-09-20", "Lunes y Miércoles de 13:00 a 16:00");
+        Curso curso6("C006", "Lógica de Programación", 35, "2022-05-20", "2022-08-10", "Martes y Jueves de 10:00 a 13:00");
+        Curso curso7("C007", "Desarrollo de Videojuegos", 55, "2022-07-15", "2022-10-15", "Lunes y Miércoles de 16:00 a 19:00");
+        Curso curso8("C008", "Robótica", 25, "2022-06-01", "2022-08-31", "Martes y Jueves de 19:00 a 22:00");
+        Curso curso9("C009", "Realidad Virtual", 40, "2022-05-10", "2022-08-20", "Lunes y Miércoles de 10:00 a 13:00");
+        Curso curso10("C0010", "Seguridad Informática", 45, "2022-07-01", "2022-10-01", "Martes y Jueves de 16:00 a 19:00");
+        mCurso.addCurso(curso1);
+        mCurso.addCurso(curso2);
+        mCurso.addCurso(curso3);
+        mCurso.addCurso(curso4);
+        mCurso.addCurso(curso5);
+        mCurso.addCurso(curso6);
+        mCurso.addCurso(curso7);
+        mCurso.addCurso(curso8);
+        mCurso.addCurso(curso9);
+        mCurso.addCurso(curso10);
+
     ManejadorUsuarios mUsuario;
-    /*
-    Curso curso2("ad","hola",2,"20-12-12","21-12-12","L9:30,M10:30,J11:30");
-    mCurso.addCurso(curso2);
-    Curso curso = mCurso.getCursos()[0];
-    curso.printCurso();
-    */
-   bool salir = true;
+        Usuario usuario1("123456789", "Juan Perez", "juanperez@gmail.com", "password1234", 123456789, "USUARIO", "01/01/2000");
+        Usuario administrador1("987654321", "Ana Rodriguez", "anarodriguez@gmail.com", "password4321", 987654321, "ADMINISTRADOR", "02/02/2002");
+        Usuario administradorCursos1("111111111", "Pedro Martinez", "pedromartinez@gmail.com", "password11111", 111111111, "ADMINISTRADOR_CURSOS", "03/03/2003");
+        Usuario usuario2("222222222", "María Sánchez", "mariasanchez@gmail.com", "password22222", 222222222, "USUARIO", "04/04/2004");
+        mUsuario.addUsuario(usuario1);
+        mUsuario.addUsuario(administrador1);
+        mUsuario.addUsuario(administradorCursos1);
+        mUsuario.addUsuario(usuario2);
+   bool continuar = true;
    int opcion= 0;
-   while(salir){
+   while(continuar){
     cout<<"Introduzca la opcion que quiera: "<<endl;
     menuInicial();
     cin>>opcion;
-    if(opcion == 0){
-        salir=true;
+    if(opcion == 3){
+        continuar=false;
     }else if (opcion == 1){
         mUsuario.addUsuario(registrar());
         cout<<"Usuario registrado correctamente"<<endl;
@@ -38,25 +62,55 @@ int main(){
         cin>>email;
         cout<<"Introduzca su password"<<endl;
         cin>>password;
+
         if(! mUsuario.checkLogin(email,password)){
             cout<<"Login no introducido correctamente"<<endl;
         }else{
+                cout<<"Login correcto"<<endl;
             Usuario usuario = mUsuario.findUsuario(email);
             if(usuario.getTipoUsuario()== "USUARIO"){
-                while(salir){
+                while(continuar){
                     menuUsuario();
                     cin>>opcion;
+                    if(opcion ==1){
+                        mCurso.printAll();
+                    }else if(opcion ==2){
+                        mCurso.printAllIn(usuario.getDni());
+                    }else if(opcion==3){
+                        string idCurso;
+                        cout<<"Introduzca la id del curso al que quiere inscribirse"<<endl;
+                        cin>>idCurso;
+                        if(mCurso.addUserToCurso(idCurso,usuario)){
+                            cout<<"Agregado correctamente"<<endl;
+                        }else{cout<<"No se ha encontrado el curso"<<endl;}
+                    }
+
                 }
             }else if(usuario.getTipoUsuario()== "ADMINISTRADOR"){
-                while(salir){
+                while(continuar){
                     menuAdmin();
                     cin>>opcion;
                 }
-            }else if (usuario.getTipoUsuario()== "ADMINISTADOR_CURSOS"){
-                while(salir){
+            }else if (usuario.getTipoUsuario()== "ADMINISTRADOR_CURSOS"){
+                while(continuar){
                     menuCursos();
                     cin>>opcion;
+                    if(opcion == 1){
+                        mCurso.printAll();
+                    }else if(opcion == 2){
+                        mCurso.addCurso(crear());
+                    }else if(opcion == 3){
+                        string idCurso;
+                        mCurso.printAllNames();
+                        cout<<"Introduzca la id del curso a borrar"<<endl;
+                        cin>>idCurso;
+                        if(mCurso.removeCurso(idCurso)){
+                            cout<<"Curso borrado"<<endl;
+                        }else{cout<<"Error al borrar el curso"<<endl;}
+                    }
                 }
+            }else{
+                cout<<"Error, no es ningun tipo valido"<<endl;
             }
         };
     }
@@ -71,9 +125,19 @@ void menuInicial(){
     cout<<"2.Iniciar Sesión"<<endl;
     cout<<"3.Salir"<<endl;
 }
-void menuUsuario(){cout<<"menu"<<endl;}
-void menuAdmin(){cout<<"menu"<<endl;}
-void menuCursos(){cout<<"menu"<<endl;}
+void menuUsuario(){
+    cout<<"1.ver todos los  Cursos"<<endl;
+    cout<<"2.ver cursos donde estoy matriculado"<<endl;
+    cout<<"3.inscribirse a un curso"<<endl;
+}
+void menuAdmin(){
+    cout<<"menuAdmin"<<endl;
+}
+void menuCursos(){
+    cout<<"1.ver Cursos"<<endl;
+    cout<<"2.nuevo Curso"<<endl;
+    cout<<"3.eliminar Curso"<<endl;
+}
 
 
 Usuario registrar(){
@@ -130,13 +194,12 @@ Curso crear() {
     cin >> nombre;
     cout << "Introduce la capacidad del curso: ";
     cin >> capacidad;
-    cout << "Introduce la fecha de inicio del curso (dd/mm/yyyy): ";
+    cout << "Introduce la fecha de inicio del curso (yyyy-mm-dd): ";
     cin >> fechaDeInicio;
-    cout << "Introduce la fecha de fin del curso (dd/mm/yyyy): ";
+    cout << "Introduce la fecha de fin del curso (yyyy-mm-dd): ";
     cin >> fechaDeFin;
     cout << "Introduce el horario del curso: ";
     cin >> horario;
-
     int numRequisitos;
     cout << "Introduce el número de requisitos del curso: ";
     cin >> numRequisitos;

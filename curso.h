@@ -63,6 +63,8 @@ class Curso {
     bool removeRecurso(string recurso);
     bool modifyRecurso(string recursoAntiguo, string recursoNuevo);
     void printCurso();
+    void addParticipante(Usuario usuario){this->participantes.push_back(usuario);}
+    bool isUserIn(string dni);
 };
 
 #endif // CURSO_H

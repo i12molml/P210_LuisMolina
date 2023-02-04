@@ -42,7 +42,7 @@ class Usuario {
         void setTipoUsuario(string tipoUsuario) {this->tipoUsuario = tipoUsuario;}
         void setFechaNacimiento(string fechaNacimiento) {this->fechaNacimiento = fechaNacimiento;}
 
-        void printUsuario(Usuario usuario);
+        void printUsuario();
 };
 
 #endif // USUARIO_H

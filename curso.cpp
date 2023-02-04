@@ -6,6 +6,16 @@
 #include "curso.h"
 using namespace std;
 
+
+bool Curso::isUserIn(string dni){
+  for(int i=0; i<participantes.size(); i++){
+    if(dni == participantes[i].getDni()){
+      return true;
+    }
+  }
+  return false;
+}
+
 bool Curso::addRecurso(string recurso) {
     this->recursos.push_back(recurso);
     return true;
