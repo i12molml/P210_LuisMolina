@@ -1,37 +1,35 @@
 #include <string>
 #include <vector>
 #include "usuario.h"
+#include "manejadorUsuarios.h"
 using namespace std;
 
-
-class ManejadorUsuarios {
-private:
-  vector<Usuario> usuarios;
-
-public:
-  void addUsuario(Usuario usuario) {
+  bool ManejadorUsuarios::addUsuario(Usuario usuario) {
     this->usuarios.push_back(usuario);
+    return true;
   }
 
-  void removeUsuario(Usuario usuario) {
+  bool ManejadorUsuarios::removeUsuario(Usuario usuario) {
     for (int i = 0; i < usuarios.size(); i++) {
       if (usuarios[i].getDni() == usuario.getDni()) {
         usuarios.erase(usuarios.begin() + i);
-        break;
+        return true;
       }
     }
+    return false;
   }
 
-  void modifyUsuario(Usuario usuarioAntiguo, Usuario usuarioNuevo) {
+  bool ManejadorUsuarios::modifyUsuario(Usuario usuarioAntiguo, Usuario usuarioNuevo) {
     for (int i = 0; i < usuarios.size(); i++) {
       if (usuarios[i].getDni() == usuarioAntiguo.getDni()) {
         usuarios[i] = usuarioNuevo;
-        break;
+        return true;
       }
     }
+    return false;
   }
 
-  Usuario findUsuario(string dni) {
+  Usuario ManejadorUsuarios::findUsuario(string dni) {
     for (int i = 0; i < usuarios.size(); i++) {
       if (usuarios[i].getDni() == dni) {
         return usuarios[i];
@@ -39,4 +37,4 @@ public:
     }
     return Usuario("", "", "", "", 0, "", "");
   }
-};
+

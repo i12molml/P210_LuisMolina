@@ -1,37 +1,37 @@
 #include <string>
 #include <vector>
 #include "curso.h"
+#include "manejadorCursos.h"
 using namespace std;
 
 
-class ManejadorCursos {
-private:
-  vector<Curso> cursos;
 
-public:
-  void addCurso(Curso curso) {
+  bool ManejadorCursos::addCurso(Curso curso) {
     this->cursos.push_back(curso);
+    return true;
   }
 
-  void removeCurso(Curso curso) {
+  bool ManejadorCursos::removeCurso(Curso curso) {
     for (int i = 0; i < cursos.size(); i++) {
       if (cursos[i].getId() == curso.getId()) {
         cursos.erase(cursos.begin() + i);
-        break;
+        return true;
       }
     }
+    return false;
   }
 
-  void modifyCurso(Curso cursoAntiguo, Curso cursoNuevo) {
+  bool ManejadorCursos::modifyCurso(Curso cursoAntiguo, Curso cursoNuevo) {
     for (int i = 0; i < cursos.size(); i++) {
       if (cursos[i].getId() == cursoAntiguo.getId()) {
         cursos[i] = cursoNuevo;
-        break;
+        return true;
       }
     }
+    return false;
   }
 
-  Curso findCurso(string id) {
+  Curso ManejadorCursos::findCurso(string id) {
     for (int i = 0; i < cursos.size(); i++) {
       if (cursos[i].getId() == id) {
         return cursos[i];
@@ -39,4 +39,4 @@ public:
     }
     return Curso("", "", 0, "", "", "");
   }
-};
+
