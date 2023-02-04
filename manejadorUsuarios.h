@@ -16,7 +16,8 @@ class ManejadorUsuarios {
         bool addUsuario(Usuario usuario);
         bool removeUsuario(Usuario usuario);
         bool modifyUsuario(Usuario usuarioAntiguo, Usuario usuarioNuevo);
-        Usuario findUsuario(string dni);
+        Usuario findUsuario(string email);
+        bool checkLogin(string email,string password);
 };
 
 #endif // MANEJADORUSUARIOS_H

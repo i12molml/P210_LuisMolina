@@ -15,6 +15,7 @@ class Usuario {
         string tipoUsuario;
         string fechaNacimiento;
     public:
+        Usuario();
         Usuario(string dni, string nombreCompleto, string email, string password, int telefono, string tipoUsuario, string fechaNacimiento) {
         this->dni = dni;
         this->nombreCompleto = nombreCompleto;

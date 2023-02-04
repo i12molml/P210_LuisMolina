@@ -27,6 +27,17 @@ class Curso {
     this->fechaDeFin = fechaDeFin;
     this->horario = horario;
   }
+  Curso(string id, string nombre, int capacidad, string fechaDeInicio, string fechaDeFin, string horario,vector<string>recursos,vector<Requisitos>requisitos) {
+    this->id = id;
+    this->nombre = nombre;
+    this->capacidad = capacidad;
+    this->fechaDeInicio = fechaDeInicio;
+    this->fechaDeFin = fechaDeFin;
+    this->horario = horario;
+    this->requisitos = requisitos;
+    this->recursos = recursos;
+  }
+
     string getId() const { return id; }
     string getNombre() const { return nombre; }
     int getCapacidad() const { return capacidad; }

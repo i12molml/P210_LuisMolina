@@ -14,7 +14,10 @@ public:
     this->id = id;
     this->tipo = tipo;
   }
-
+  Requisitos(string tipo){
+    this->tipo = tipo;
+    this->id = rand()%100000;
+  }
   int getId() {return id;};
   void setId(int id){this->id = id;};
   string getTipo() {return tipo;};

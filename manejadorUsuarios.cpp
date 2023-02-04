@@ -29,12 +29,20 @@ using namespace std;
     return false;
   }
 
-  Usuario ManejadorUsuarios::findUsuario(string dni) {
+  Usuario ManejadorUsuarios::findUsuario(string email) {
     for (int i = 0; i < usuarios.size(); i++) {
-      if (usuarios[i].getDni() == dni) {
+      if (usuarios[i].getEmail() == email) {
         return usuarios[i];
       }
     }
     return Usuario("", "", "", "", 0, "", "");
   }
 
+  bool ManejadorUsuarios::checkLogin(string email,string password){
+    for (int i = 0; i < usuarios.size(); i++) {
+      if (usuarios[i].getEmail() == email) {
+        return (usuarios[i].getPassword()==password);
+      }
+    }
+    return false;
+  }
