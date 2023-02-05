@@ -52,11 +52,13 @@ int main(){
     cout<<"Introduzca la opcion que quiera: "<<endl;
     menuInicial();
     cin>>opcion;
-    if(opcion == 3){
+    if(opcion == 4){
         continuar=false;
     }else if (opcion == 1){
         mUsuario.addUsuario(registrar());
         cout<<"Usuario registrado correctamente"<<endl;
+    }else if(opcion == 3){
+        mCurso.printAll();
     }else if (opcion == 2){
         string email,password;
         cout<<"Introduzca su email"<<endl;
@@ -147,28 +149,29 @@ void menuInicial(){
     cout<<"Bienvenido"<<endl;
     cout<<"1.Registrarse"<<endl;
     cout<<"2.Iniciar Sesión"<<endl;
-    cout<<"3.Salir"<<endl;
+    cout<<"3.Ver todos los  cursos"<<endl;
+    cout<<"4.Salir"<<endl;
 }
 void menuUsuario(){
     cout<<"Menu de Usuario"<<endl;
-    cout<<"1.ver todos los  Cursos"<<endl;
-    cout<<"2.ver cursos donde estoy matriculado"<<endl;
-    cout<<"3.inscribirse a un curso"<<endl;
+    cout<<"1.Ver todos los  Cursos"<<endl;
+    cout<<"2.Ver cursos donde estoy matriculado"<<endl;
+    cout<<"3.Inscribirse a un curso"<<endl;
     cout<<"4.Salir"<<endl;
 }
 void menuAdmin(){
     cout<<"Menu de Administrador"<<endl;
-    cout<<"1.ver Cursos"<<endl;
-    cout<<"2.nuevo Curso"<<endl;
-    cout<<"3.eliminar Curso"<<endl;
+    cout<<"1.Ver Cursos"<<endl;
+    cout<<"2.Nuevo Curso"<<endl;
+    cout<<"3.Eliminar Curso"<<endl;
     cout<<"4.Listar Usuarios"<<endl;
     cout<<"5.Salir"<<endl;
 }
 void menuCursos(){
     cout<<"Menu de Administrador de Cursos"<<endl;
-    cout<<"1.ver Cursos"<<endl;
-    cout<<"2.nuevo Curso"<<endl;
-    cout<<"3.eliminar Curso"<<endl;
+    cout<<"1.Ver Cursos"<<endl;
+    cout<<"2.Nuevo Curso"<<endl;
+    cout<<"3.Eliminar Curso"<<endl;
     cout<<"4.Salir"<<endl;
 }
 
