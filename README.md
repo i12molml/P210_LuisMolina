@@ -1,3 +1,3 @@
-#Get started#
+#Get started
 
 g++
