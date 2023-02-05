@@ -1,1 +1,3 @@
-.
+#Get started#
+
+g++
