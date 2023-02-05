@@ -1,3 +1,6 @@
 **Get started**
 
-g++
+| Command | Description |
+| --- | --- |
+| `make` | Compilation |
+| `./ext` | Execute the program |
