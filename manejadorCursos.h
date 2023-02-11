@@ -2,7 +2,7 @@
 #define MANEJADORCURSOS_H
 
 #include <vector>
-#include "Curso.h"
+#include "curso.h"
 
 using namespace std;
 
