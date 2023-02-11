@@ -3,4 +3,4 @@
 | Command | Description |
 | --- | --- |
 | `make` | Compilation |
-| `./ext` | Execute the program |
+| `./app` | Execute the program |
